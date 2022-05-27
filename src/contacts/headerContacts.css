@@ -46,6 +46,10 @@
     padding-right: 2%;
     white-space: nowrap;
 }
+.nav-chapter>a{
+    text-decoration: none;
+    color:#ffffff;
+}
 /* button sign-in or information about user */
 .user-info{
     margin-right:5%;

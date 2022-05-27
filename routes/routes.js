@@ -6,7 +6,7 @@ const router = app => {
     // GET-запросы
     app.get('/', (request, response) => {
         
-        response.sendFile('src/index.html', null, (error) => {
+        response.sendFile('src/mainPage/index.html', null, (error) => {
             if (error) throw error;
         });
     });
