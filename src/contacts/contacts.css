@@ -8,8 +8,14 @@
     background-image: url('../images/bmw_fary_podsvetka_137326_1920x1080.jpg');
     background-repeat: no-repeat;
 }
-/* Text in the center */
-.description{
+/* Contacts in the center */
+.contacts{
+    margin:0 auto;
+
+    padding:8% 16%;
+
+    background:none;
+
     height:600px;
 
     color:#ffffff;
@@ -18,15 +24,73 @@
     justify-content: space-around;
     align-items: center;
 
-    font-size: 28px;
+    
 }
-.description>div{
-    margin:0 auto;
-
+.contacts>div{
     padding:8% 16%;
 
-    text-align:center;
+    background:#06060c80;
+
+    border: 1px solid #ffffff;
+
+    display:flex;
+    justify-content: space-around;
 }
-.description>div>span{
-    background:#10101f80;
+/* phones block */
+.phones{
+    padding-left: 6%;
+    padding-right: 6%;
+    
+    font-size: 20px;
+
+    display:flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+.phone-headline{
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    text-decoration: 1px underline;
+}
+.phone{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.phone>a{
+    white-space: nowrap;
+    text-decoration: none;
+    color:#ffffff;
+}
+/* emails block */
+.emails{
+    padding-left: 6%;
+    padding-right: 6%;
+
+    font-size: 20px;
+
+    display:flex;
+    flex-direction: column;
+}
+.email-headline{
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    text-decoration: 1px underline;
+}
+.email{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.email>a{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+/* background:#10101f80; */
+
+@media screen and (max-width:730px) {
+    .contacts>div{
+        flex-direction: column;
+    }
 }
