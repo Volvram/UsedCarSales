@@ -94,3 +94,29 @@
         flex-direction: column;
     }
 }
+
+/* Sign-in modal window */
+.sign-in{
+    display:none;
+
+    position:absolute;
+
+    height:50%;
+    width:50%;
+
+    top:25%;
+    left:25%;
+
+    background:#ffffff;
+
+    border-radius: 6px;
+}
+.sign-in-exit{
+    display:none;
+
+    position:absolute;
+
+    background:#10101fe7;
+
+    color:#ffffff;
+}
