@@ -8,6 +8,9 @@ const routes = require('./routes/routes.js');
 // Используем хранение файлов для динамической отправки
 app.use(express.static("src"));
 app.use(express.static("src/mainPage"));
+app.use(express.static("src/contacts"));
+app.use(express.static("src/aboutCompany"));
+app.use(express.static("src/scripts"));
 
 // Парсим URL и объекты в json-формат
 app.use(bodyParser.json());

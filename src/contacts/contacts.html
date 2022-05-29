@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="footerContacts.css">
     <!--Scripts-->
-    <script src="contacts.js" defer></script>
+    <script src="../scripts/signInModalWindow.js" defer></script>
+    <script src="../scripts/windowResize.js" defer></script>
     <title>Купить, продать автомобиль</title>
 </head>
 <body>
@@ -61,11 +62,16 @@
         </div>
         <div class="sign-in">
             <button class="sign-in-exit">Закрыть</button>
+            <h1>Войти</h1>
             <div class="sign-in-form">
-                <h1>Войти</h1>
-                <form method="post">
-
+                <form method="post" action="">
+                    <label for="email">E-mail</label>
+                    <input class="sign-in-input" type="email" name="email">
+                    <label for="email">Пароль</label>
+                    <input class="sign-in-input" type="password" name="password">
+                    <input class="sign-in-submit" type="submit" value="Войти">
                 </form>
+                <button class="sign-up-button">Зарегистрироваться</button>
             </div>
         </div>
     </main>
