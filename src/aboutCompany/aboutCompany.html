@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="aboutCompany.css">
     <link rel="stylesheet" href="footerAboutCompany.css">
     <!--Scripts-->
-    <script src="../scripts/signInModalWindow.js" defer></script>
+    <script type="module" src="../scripts/signInModalWindow.js" defer></script>
+    <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
     <script src="../scripts/windowResize.js" defer></script>
     <title>Купить, продать автомобиль</title>
 </head>
@@ -67,6 +68,28 @@
                     <input class="sign-in-submit" type="submit" value="Войти">
                 </form>
                 <button class="sign-up-button">Зарегистрироваться</button>
+            </div>
+        </div>
+        <div class="sign-up">
+            <button class="sign-up-exit">Закрыть</button>
+            <h1>Регистрация</h1>
+            <div class="sign-up-form">
+                <form method="post" action="">
+                    <label for="email">E-mail</label>
+                    <input class="sign-up-input" type="email" name="email">
+                    <label for="email">Пароль</label>
+                    <input class="sign-up-input" type="password" name="password">
+                    <label for="email">Имя</label>
+                    <input class="sign-up-input" type="text" name="name">
+                    <label for="email">Фамилия</label>
+                    <input class="sign-up-input" type="text" name="surname">
+                    <label for="email">Отчество</label>
+                    <input class="sign-up-input" type="text" name="patronymic">
+                    <label for="email">Телефон</label>
+                    <input class="sign-up-input" type="tel" name="tel">
+                    <input class="sign-up-submit" type="submit" value="Зарегистрироваться">
+                </form>
+                <button class="sign-in-modal-button">Войти</button>
             </div>
         </div>
     </main>

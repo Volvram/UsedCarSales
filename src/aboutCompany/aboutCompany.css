@@ -76,19 +76,23 @@ body{
     border-radius: 6px;
 }
 .sign-in-exit{
-    display:none;
-
     position:absolute;
+
+    padding:1%;
 
     cursor:pointer;
 
     background:#ffffff;
 
     border: 2px solid #ffffff;
+    border-radius: 1px;
 
     color: #10101fe7;
 
     font-size: 18px;
+
+    display:flex;
+    align-self: flex-end;
 }
 .sign-in>h1{
     text-align: center;
@@ -145,6 +149,108 @@ body{
 }
 @media screen and (max-width:670px) {
     .sign-in{
+        height:805px;
+        width:99%;
+
+        top:0%;
+        left:0%;
+    }
+    .sign-in-exit{
+        padding: 3%;
+    }
+}
+
+/* Sign up modal window */
+.sign-up{
+    display:none;
+
+    position:absolute;
+
+    height:700px;
+    width:50%;
+
+    top:20%;
+    left:25%;
+
+    background:#09090eef;
+
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+}
+.sign-up-exit{
+    position:absolute;
+
+    padding:1%;
+
+    cursor:pointer;
+
+    background:#ffffff;
+
+    border: 2px solid #ffffff;
+    border-radius: 1px;
+
+    color: #10101fe7;
+
+    font-size: 18px;
+
+    display:flex;
+    align-self: flex-end;
+}
+.sign-up>h1{
+    text-align: center;
+    color:#ffffff;
+}
+.sign-up-form{
+    color:#ffffff;
+    height:100%;
+    
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+.sign-up-form>form{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.sign-up-input{
+    margin-bottom:10%;
+}
+.sign-up-submit{
+    margin-top:10%;
+
+    padding-top:3%;
+    padding-bottom:3%;
+
+    cursor:pointer;
+
+    background:#ffffff;
+
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+
+    color: #10101fe7;
+
+    font-size: 22px;
+}
+.sign-in-modal-button{
+    margin-top:30%;
+
+    padding: 2%;
+
+    cursor:pointer;
+
+    background:#ffffff;
+
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+
+    color: #10101fe7;
+
+    font-size: 18px;
+}
+@media screen and (max-width:670px) {
+    .sign-up{
         height:805px;
         width:99%;
 
