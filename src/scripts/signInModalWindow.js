@@ -11,14 +11,14 @@ function signInModalWindow(){
 
     // Sign in button in navigation
     signInButton.addEventListener('click', (event) => {
-        openModalWindow(signIn);
         closeModalWindow(signUp);
+        openModalWindow(signIn);
     });
 
     // Sign in button in sign up modal window
     signInModalButton.addEventListener('click', (event) => {
-        openModalWindow(signIn);
         closeModalWindow(signUp);
+        openModalWindow(signIn);
     });
     
     // Exit sign in

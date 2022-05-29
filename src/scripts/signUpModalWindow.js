@@ -10,8 +10,8 @@ function signUpModalWindow(){
 
     // Sign up button in sign in modal window
     signUpButton.addEventListener('click', (event) => {
-        openModalWindow(signUp);
         closeModalWindow(signIn);
+        openModalWindow(signUp);
     });
     
     // Exit sign in
