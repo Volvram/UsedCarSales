@@ -1,4 +1,4 @@
-// Подключаем пакеты и порт (npm install body-parser express mysql)
+// Подключаем пакеты и порт (npm install body-parser express mysql express-validator bcryptjs jsonwebtoken)
 const express = require("express");
 const port = 3210;
 const app = express();
