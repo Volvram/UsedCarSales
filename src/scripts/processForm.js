@@ -15,14 +15,16 @@ function processForm(){
         let sendingObject = {};
 
         signInInputs.forEach((input, index) => {
-            sendingObject[input.name] = input.value;
+            if (input.value != ''){
+                sendingObject[input.name] = input.value;
+            }
         });
 
         sendLoginRequest(link, sendingObject)
         .then((response) => {
             console.log(response);
         }, (response) => {
-            console.log(response.msg);
+            alert(response.msg);
         });
 
     });
@@ -35,14 +37,16 @@ function processForm(){
         let sendingObject = {};
 
         signUpInputs.forEach((input, index) => {
-            sendingObject[input.name] = input.value;
+            if (input.value != ''){
+                sendingObject[input.name] = input.value;
+            }
         });
 
         sendRegisterRequest(link, sendingObject)
         .then((response) => {
             console.log(response.msg);
         }, (response) => {
-            console.log(response.msg);
+            alert(response.msg);
         });
 
     });
