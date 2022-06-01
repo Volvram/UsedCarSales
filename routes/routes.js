@@ -33,10 +33,10 @@ const router = app => {
 
         pool.query(`SELECT * FROM users WHERE LOWER(email) = LOWER(${pool.escape(request.body.email)});`, (error, result) => {
             if (result.length) {
-                response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");
-                // return response.status(409).send({
-                //     msg: 'Данный пользователь уже существует!'
-                // });
+                // response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");
+                return response.status(409).send({
+                    msg: 'Данный пользователь уже существует!'
+                });
             } else {
                 // username is available
                 bcrypt.hash(request.body.password, 10, (err, hash) => {
@@ -68,6 +68,9 @@ const router = app => {
     // Авторизация
     app.post('/login', loginValidation, (request, response, next) => {
 
+        console.log('request.body:');
+        console.log(request.body);
+
         pool.query(`SELECT * FROM users WHERE email = ${pool.escape(request.body.email)};`, (err, result) => {
             // user does not exists
             if (err) {
@@ -82,15 +85,18 @@ const router = app => {
                 });
             }
 
-            console.log(request.body);
+            console.log('user:');
             console.log(result);
 
             // check password
             // For admin
             if (result[0]['email'] == 'example@mail.ru'){
                 if (request.body.password === result[0]['pwd']){
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
+                    pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         msg: 'Авторизация пройдена!',
+                        token,
                         user: result[0]
                     });
                 }else{
