@@ -25,7 +25,6 @@ function windowResize(){
             signUpExit.style.paddingRight = '1%';
             signUpExit.style.paddingBottom = '1%';
         }
-        console.log(window.outerWidth);
     });
 }
 windowResize();
