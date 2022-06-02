@@ -91,7 +91,7 @@ const router = app => {
             // For admin
             if (result[0]['email'] == 'example@mail.ru'){
                 if (request.body.password === result[0]['pwd']){
-                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '15m' });
                     pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
@@ -115,7 +115,7 @@ const router = app => {
                 }
             
                 if (bResult) {
-                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '10m' });
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '15m' });
                     pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
