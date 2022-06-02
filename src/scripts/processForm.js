@@ -1,9 +1,15 @@
 import sendLoginRequest from "./sendLoginRequest.js";
 import sendRegisterRequest from "./sendRegisterRequest.js";
+import closeModalWindow from "./closeModalWindow.js";
+import checkUser from "./checkUser.js";
 
 function processForm(){
+    // Sign in
+    const signIn = document.querySelector('.sign-in');
     const signInForm = document.querySelector('.sign-in-form>form');
     const signInInputs = document.querySelectorAll('.sign-in-input');
+    // Sign up
+    const signUp = document.querySelector('.sign-up');
     const signUpForm = document.querySelector('.sign-up-form>form');
     const signUpInputs = document.querySelectorAll('.sign-up-input');
 
@@ -22,9 +28,11 @@ function processForm(){
 
         sendLoginRequest(link, sendingObject)
         .then((response) => {
-            console.log(response);
+            closeModalWindow(signIn);
+            localStorage.setItem('token', response.token);
+            checkUser();
         }, (response) => {
-            alert(response.msg);
+            alert(response.message);
         });
 
     });
@@ -44,9 +52,10 @@ function processForm(){
 
         sendRegisterRequest(link, sendingObject)
         .then((response) => {
-            console.log(response.msg);
+            closeModalWindow(signUp);
+            alert(response.message);
         }, (response) => {
-            alert(response.msg);
+            alert(response.message);
         });
 
     });

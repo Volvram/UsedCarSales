@@ -35,14 +35,14 @@ const router = app => {
             if (result.length) {
                 // response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");
                 return response.status(409).send({
-                    msg: 'Данный пользователь уже существует!'
+                    message: 'Данный пользователь уже существует!'
                 });
             } else {
                 // username is available
                 bcrypt.hash(request.body.password, 10, (err, hash) => {
                     if (err) {
                         return response.status(500).send({
-                            msg: err
+                            message: err
                         });
                     } else {
                         // has hashed pw => add to database
@@ -52,11 +52,11 @@ const router = app => {
                             if (err) {
                                 throw err;
                                 return response.status(400).send({
-                                msg: err
+                                    message: err
                                 });
                             }
                             return response.status(201).send({
-                                msg: 'Пользователь был зарегистрирован!'
+                                message: 'Пользователь был зарегистрирован!'
                             });
                         });
                     }
@@ -74,14 +74,13 @@ const router = app => {
         pool.query(`SELECT * FROM users WHERE email = ${pool.escape(request.body.email)};`, (err, result) => {
             // user does not exists
             if (err) {
-                throw err;
                 return response.status(400).send({
-                    msg: err
+                    message: err
                 });
             }
             if (!result.length) {
                 return response.status(401).send({
-                    msg: 'Неверный Email или пароль!'
+                    message: 'Неверный Email или пароль!'
                 });
             }
 
@@ -95,13 +94,13 @@ const router = app => {
                     const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
                     pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
-                        msg: 'Авторизация пройдена!',
+                        message: 'Авторизация пройдена!',
                         token,
                         user: result[0]
                     });
                 }else{
                     return response.status(401).send({
-                        msg: 'Неверный Email или пароль!'
+                        message: 'Неверный Email или пароль!'
                     });
                 }
             }
@@ -110,17 +109,16 @@ const router = app => {
 
             // wrong password
                 if (bErr) {
-                    throw bErr;
                     return response.status(401).send({
-                        msg: 'Неверный Email или пароль!'
+                        message: 'Неверный Email или пароль!'
                     });
                 }
             
                 if (bResult) {
-                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '10m' });
                     pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
-                        msg: 'Авторизация пройдена!',
+                        message: 'Авторизация пройдена!',
                         token,
                         user: result[0]
                     });
@@ -130,22 +128,34 @@ const router = app => {
     });
 
     // Получение данных пользователя
-    app.post('/get-user', signupValidation, (request, response, next) => {
+    app.post('/get-user', (request, response, next) => {
         if(
             !request.headers.authorization ||
             !request.headers.authorization.startsWith('Bearer') ||
             !request.headers.authorization.split(' ')[1]
         ){
             return response.status(422).json({
+                error: true,
                 message: "Пожалуйста предоставьте токен",
             });
         }
         const theToken = request.headers.authorization.split(' ')[1];
-        const decoded = jwt.verify(theToken, 'the-super-strong-secrect');
-        pool.query('SELECT * FROM users where id=?', decoded.id, function (error, results, fields) {
-        if (error) throw error;
-            return response.send({ error: false, data: results[0], message: 'Fetch Successfully.' });
+        const decoded = jwt.verify(theToken, 'the-super-strong-secrect', (err, res) => {
+            if (err){
+                response.send({error: true, message: "Токен истёк"});
+                return;
+            }else{
+                return res;
+            }
         });
+        if (decoded != undefined){
+            pool.query('SELECT * FROM users where id=?', decoded.id, function (error, results, fields) {
+                if (error){
+                    return response.send({error: true, message: "Что-то пошло не так"});
+                } 
+                return response.send({ error: false, user: results[0], message: 'Аутентификация пройдена.' });
+            });
+        }
     });
 
     // PUT-запросы
