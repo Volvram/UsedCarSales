@@ -12,6 +12,10 @@ function processForm(){
     const signUp = document.querySelector('.sign-up');
     const signUpForm = document.querySelector('.sign-up-form>form');
     const signUpInputs = document.querySelectorAll('.sign-up-input');
+    // Profile
+    const profile = document.querySelector('.profile');
+    const profileForm = document.querySelector('.profile-form>form');
+    const profileInputs = document.querySelectorAll('.profile-input');
 
     // Processing login form
     signInForm.addEventListener('submit', (event) => {
@@ -59,6 +63,22 @@ function processForm(){
         });
 
     });
+
+    // Processing profile form
+    profileForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        
+        let link = event.target.action;
+        let sendingObject = {};
+
+        profileInputs.forEach((input, index) => {
+            if (input.value != ''){
+                sendingObject[input.name] = input.value;
+            }
+        });
+
+        // Далее запрос на редактирование...
+    })
 }
 
 processForm();

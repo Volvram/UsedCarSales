@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="footerContacts.css">
     <link rel="stylesheet" href="../commonStyles/signIn.css">
     <link rel="stylesheet" href="../commonStyles/signUp.css">
+    <link rel="stylesheet" href="../commonStyles/profile.css">
     <!--Scripts-->
     <script type="module" src="../scripts/signInModalWindow.js" defer></script>
     <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
@@ -99,6 +100,24 @@
                     <input class="sign-up-submit" type="submit" value="Зарегистрироваться">
                 </form>
                 <button class="sign-in-modal-button">Войти</button>
+            </div>
+        </div>
+        <div class="profile">
+            <button class="profile-exit">Закрыть</button>
+            <h1>Профиль</h1>
+            <div class="profile-form">
+                <form method="post" action="http://localhost:3210/edit">
+                    <label for="email">Имя</label>
+                    <input class="profile-input" type="text" name="name">
+                    <label for="email">Фамилия</label>
+                    <input class="profile-input" type="text" name="surname">
+                    <label for="email">Отчество</label>
+                    <input class="profile-input" type="text" name="patronymic">
+                    <label for="email">Телефон</label>
+                    <input class="profile-input" type="tel" name="tel">
+                    <input class="profile-submit" type="submit" value="Изменить">
+                </form>
+                <button class="profile-delete">Удалить аккаунт</button>
             </div>
         </div>
     </main>
