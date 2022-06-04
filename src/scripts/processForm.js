@@ -1,5 +1,6 @@
 import sendLoginRequest from "./sendLoginRequest.js";
 import sendRegisterRequest from "./sendRegisterRequest.js";
+import sendUserEditRequest from "./sendUserEditRequest.js";
 import closeModalWindow from "./closeModalWindow.js";
 import checkUser from "./checkUser.js";
 
@@ -49,7 +50,7 @@ function processForm(){
         let sendingObject = {};
 
         signUpInputs.forEach((input, index) => {
-            if (input.value != ''){
+            if (input.value != '' || input.name == 'patronymic'){
                 sendingObject[input.name] = input.value;
             }
         });
@@ -72,12 +73,18 @@ function processForm(){
         let sendingObject = {};
 
         profileInputs.forEach((input, index) => {
-            if (input.value != ''){
+            if (input.value != '' || input.name == 'patronymic'){
                 sendingObject[input.name] = input.value;
             }
         });
 
-        // Далее запрос на редактирование...
+        sendUserEditRequest(link, sendingObject)
+        .then((response) => {
+            alert(response.message);
+            location.reload();
+        }, (response) => {
+            alert(response.message);
+        });
     })
 }
 

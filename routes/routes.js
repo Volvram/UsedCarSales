@@ -15,23 +15,11 @@ const router = app => {
         });
     });
 
-    app.get('/main', (request, response) => {
-
-        pool.query(`SELECT * FROM users`, (error, result) => {
-            if (error) throw error;
-
-            response.send(result);
-        });
-    });
-
     // POST-запросы
-
     // Регистрация
     app.post('/register', signupValidation, (request, response, next) => {
 
-        console.log(request.body);
-
-        pool.query(`SELECT * FROM users WHERE LOWER(email) = LOWER(${pool.escape(request.body.email)});`, (error, result) => {
+        pool.query(`SELECT * FROM used_car_sales.users WHERE LOWER(email) = LOWER(${pool.escape(request.body.email)});`, (error, result) => {
             if (result.length) {
                 // response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");
                 return response.status(409).send({
@@ -46,11 +34,10 @@ const router = app => {
                         });
                     } else {
                         // has hashed pw => add to database
-                        pool.query(`INSERT INTO users (email, pwd, name, surname, patronymic, tel, type) VALUES (
+                        pool.query(`INSERT INTO used_car_sales.users (email, pwd, name, surname, patronymic, tel, type) VALUES (
                         ${pool.escape(request.body.email)}, ${pool.escape(hash)}, '${request.body.name}', 
                         '${request.body.surname}', '${request.body.patronymic}', '${request.body.tel}', 'user')`, (err, result)=> {
                             if (err) {
-                                throw err;
                                 return response.status(400).send({
                                     message: err
                                 });
@@ -68,10 +55,7 @@ const router = app => {
     // Авторизация
     app.post('/login', loginValidation, (request, response, next) => {
 
-        console.log('request.body:');
-        console.log(request.body);
-
-        pool.query(`SELECT * FROM users WHERE email = ${pool.escape(request.body.email)};`, (err, result) => {
+        pool.query(`SELECT * FROM used_car_sales.users WHERE email = ${pool.escape(request.body.email)};`, (err, result) => {
             // user does not exists
             if (err) {
                 return response.status(400).send({
@@ -92,7 +76,7 @@ const router = app => {
             if (result[0]['email'] == 'example@mail.ru'){
                 if (request.body.password === result[0]['pwd']){
                     const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '15m' });
-                    pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
+                    pool.query(`UPDATE used_car_sales.users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
                         token,
@@ -116,7 +100,7 @@ const router = app => {
             
                 if (bResult) {
                     const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '15m' });
-                    pool.query(`UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`);
+                    pool.query(`UPDATE used_car_sales.users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
                         token,
@@ -149,7 +133,7 @@ const router = app => {
             }
         });
         if (decoded != undefined){
-            pool.query('SELECT * FROM users where id=?', decoded.id, function (error, results, fields) {
+            pool.query('SELECT * FROM used_car_sales.users where id=?', decoded.id, function (error, results, fields) {
                 if (error){
                     return response.send({error: true, message: "Что-то пошло не так"});
                 } 
@@ -159,18 +143,38 @@ const router = app => {
     });
 
     // PUT-запросы
-    app.put('/', (request, response) => {
-
+    app.put('/user/edit', (request, response) => {
+        const id = request.body.id;
+        
+        pool.query('UPDATE used_car_sales.users SET ? WHERE id = ?', [request.body, id], (error, result) => {
+            if (error){
+                response.send({
+                    message: 'Ошибка обновления данных',
+                    error: error.message
+                });
+            }else{
+                response.send({
+                    message: 'Данные успешно обновлены'
+                });
+            }
+        });
     });
 
     // DELETE-запросы
-    app.delete('/user/:id', (request, response) => {
-        const id = request.params.id;
+    app.delete('/user/delete', (request, response) => {
+        const id = request.body.id;
 
         pool.query('DELETE FROM used_car_sales.users WHERE id = ?', id, (error, result) => {
-            if (error) throw error;
-
-            response.send('User deleted.');
+            if (error){
+                response.send({
+                    message: 'Ошибка удаления аккаунта',
+                    error: error.message
+                });
+            }else{
+                response.send({
+                    message: 'Аккаунт успешно удалён',
+                });
+            }
         });
     });
 }

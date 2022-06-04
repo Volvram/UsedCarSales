@@ -1,11 +1,13 @@
 import openModalWindow from "./openModalWindow.js";
 import closeModalWindow from "./closeModalWindow.js";
+import sendUserDeleteRequest from "./sendUserDeleteRequest.js";
 
 function renderUserInfo(user){
     const userInfo = document.querySelector('.user-info');
     const signInButton = document.querySelector('.sign-in-button');
 
     const profile = document.querySelector('.profile');
+    const profileInputs = document.querySelectorAll('.profile-input');
     const profileExit = document.querySelector('.profile-exit');
     const profileDelete = document.querySelector('.profile-delete');
 
@@ -26,8 +28,15 @@ function renderUserInfo(user){
     // Open profile
     userButton.addEventListener('click', (event) => {
         openModalWindow(profile);
-        // Далее нужен запрос данных из БД для отображения...
-
+        
+        async function getUserData(){
+            profileInputs.forEach((input, index) => {
+                if (input.name in user){
+                    input.value = user[input.name];
+                }
+            });
+        }
+        getUserData();
     });
 
     // Exit profile
@@ -37,10 +46,25 @@ function renderUserInfo(user){
 
     // Delete profile button
     profileDelete.addEventListener('click', (event) => {
-        let del = confirm('Подтвердить удаление аккаунта');
+        let del = confirm('Подтвердить удаление аккаунта.');
         if (del){
-            // Далее удалить аккаунт из БД...
+            
+            // Catch Id value
+            let valueId;
+            profileInputs.forEach((input, index) => {
+                if (input.name == 'id'){
+                    valueId = input.value;
+                } 
+            });
 
+            sendUserDeleteRequest('http://localhost:3210/user/delete', {id:valueId})
+            .then((response) => {
+                localStorage.removeItem('token');
+                location.reload();
+                alert(response.message);
+            }, (response) => {
+                alert(response.message);
+            })
         }
     });
 
