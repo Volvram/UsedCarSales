@@ -18,7 +18,15 @@ const router = app => {
     // POST-запросы
     // Регистрация
     app.post('/register', signupValidation, (request, response, next) => {
-
+        console.log(request.body);
+        for (let key in request.body){
+            if (request.body[key] == null && key != 'patronymic'){
+                response.send({
+                    message: `Ошибка создания пользователя, поле ${key} должно быть заполнено`
+                });
+                return;
+            }
+        }
         pool.query(`SELECT * FROM used_car_sales.users WHERE LOWER(email) = LOWER(${pool.escape(request.body.email)});`, (error, result) => {
             if (result.length) {
                 // response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");

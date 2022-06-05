@@ -26,7 +26,9 @@ function processForm(){
         let sendingObject = {};
 
         signInInputs.forEach((input, index) => {
-            if (input.value != ''){
+            if (input.value == '' && input.name != 'patronymic'){
+                sendingObject[input.name] = null;
+            }else{
                 sendingObject[input.name] = input.value;
             }
         });
@@ -50,7 +52,9 @@ function processForm(){
         let sendingObject = {};
 
         signUpInputs.forEach((input, index) => {
-            if (input.value != '' || input.name == 'patronymic'){
+            if (input.value == '' && input.name != 'patronymic'){
+                sendingObject[input.name] = null;
+            }else{
                 sendingObject[input.name] = input.value;
             }
         });

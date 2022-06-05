@@ -51,6 +51,7 @@ function renderUserInfo(user){
             
             // Catch Id value
             let valueId;
+            console.log(valueId);
             profileInputs.forEach((input, index) => {
                 if (input.name == 'id'){
                     valueId = input.value;
