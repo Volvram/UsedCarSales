@@ -1,0 +1,68 @@
+/* all header */
+.navigation{
+
+    width:100%;
+    height:100px;
+
+    background:#10101f25;
+
+    filter:brightness(200%) !important;
+
+    display:flex;
+    justify-content: space-between;
+}
+/* menu button */
+.menu{
+    display:none;
+
+    margin-left:10%;
+}
+/* chapters of the site */
+.nav{
+    margin-left:10%;
+
+    height:100px;
+
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.nav-button{
+    
+    background:#10101f25;
+
+    color:#ffffff;
+
+    border:0px;
+
+    cursor: pointer;
+
+    font-size: 22px;
+}
+.nav-chapter{
+    padding-left: 2%;
+    padding-right: 2%;
+    white-space: nowrap;
+}
+.nav-chapter>a{
+    text-decoration: none;
+    color:#ffffff;
+}
+/* button sign-in or information about user */
+.user-info{
+    margin-right:5%;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1100px) {
+    .nav{
+        display:none;
+    }
+    .menu{
+        display: flex;
+        align-items:center;
+    }
+}

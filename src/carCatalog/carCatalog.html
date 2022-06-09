@@ -5,12 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Styles-->
-    <link rel="stylesheet" href="headerContacts.css">
-    <link rel="stylesheet" href="contacts.css">
-    <link rel="stylesheet" href="footerContacts.css">
+    <link rel="stylesheet" href="headerCarCatalog.css">
+    <link rel="stylesheet" href="carCatalog.css">
+    <link rel="stylesheet" href="footerCarCatalog.css">
     <link rel="stylesheet" href="../commonStyles/signIn.css">
     <link rel="stylesheet" href="../commonStyles/signUp.css">
     <link rel="stylesheet" href="../commonStyles/profile.css">
+    <link rel="stylesheet" href="https://unpkg.com/flexboxgrid2@7.2.1/flexboxgrid2.css">
     <!--Scripts-->
     <script type="module" src="../scripts/signInModalWindow.js" defer></script>
     <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
@@ -34,14 +35,14 @@
                         <a href="../mainPage/index.html">Главная</a>
                     </button>
                     <button class="nav-button nav-chapter">
-                        <a href="../carCatalog/carCatalog.html">Каталог автомобилей</a>
-                    </button>
-                    <button class="nav-button nav-chapter">
                         <a href="">Мои автомобили </a>
                         <!-- (все/на продажу/в архиве) -->
                     </button>
                     <button class="nav-button nav-chapter">
                         <a href="">Избранное</a>
+                    </button>
+                    <button class="nav-button nav-chapter">
+                        <a href="../contacts/contacts.html">Контакты</a>
                     </button>
                     <button class="nav-button nav-chapter">
                         <a href="../aboutCompany/aboutCompany.html">О компании</a>
@@ -51,29 +52,37 @@
                     <button class="nav-button sign-in-button">Войти</button>
                 </div>
             </div>
-            <div class="contacts">
-                <div>
-                    <div class="phones">
-                        <div class="phone-headline"><span>Телефоны:</span></div>
-                        <div class="phone"><a href="tel:+79168569118">+7 (916) 856 91 18</a></div>
-                        <div class="phone"><a href="tel:+79168569118">+7 (916) 856 91 18</a></div>
-                        <div class="phone"><a href="tel:+79168569118">+7 (916) 856 91 18</a></div>
-                    </div>
-                    <div class="emails">
-                        <div class="email-headline">Почта:</div>
-                        <div class="email"><a href="mailto:example@mail.ru">example@mail.ru</a></div>
-                    </div>
+            <div class="container cars">
+                <div class="row car-choices">
+                    <a href="" class="car-choice">
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <img src="../carPhotos/BMW_M8_Gran_Coupe_Competition_I_1200x900.jpg" width="260px" height="325px">
+                        </div>
+                    </a>
+                    <a href="" class="car-choice">
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <img src="../carPhotos/BMW_M8_Gran_Coupe_Competition_I_1200x900.jpg" width="260px" height="325px">
+                        </div>
+                    </a>
+                    <a href="" class="car-choice">
+                        <div class="col-lg-4 col-md-6 col-xs-12">
+                            <img src="../carPhotos/BMW_M8_Gran_Coupe_Competition_I_1200x900.jpg" width="260px" height="325px">
+                        </div>
+                    </a>
                 </div>
             </div>
+            <!-- to fix container -->
+            <div class="clearfix"></div>
         </div>
         <div class="sign-in">
             <button class="sign-in-exit">Закрыть</button>
             <h1>Войти</h1>
             <div class="sign-in-form">
                 <form method="post" action="http://localhost:3210/login">
+                    <input type="hidden" name="id" readonly>
                     <label for="email">E-mail</label>
                     <input class="sign-in-input" type="email" name="email">
-                    <label for="email">Пароль</label>
+                    <label for="password">Пароль</label>
                     <input class="sign-in-input" type="password" name="password">
                     <input class="sign-in-submit" type="submit" value="Войти">
                 </form>
@@ -85,17 +94,18 @@
             <h1>Регистрация</h1>
             <div class="sign-up-form">
                 <form method="post" action="http://localhost:3210/register">
+                    <input type="hidden" name="id" readonly>
                     <label for="email">E-mail</label>
                     <input class="sign-up-input" type="email" name="email">
-                    <label for="email">Пароль</label>
+                    <label for="password">Пароль</label>
                     <input class="sign-up-input" type="password" name="password">
-                    <label for="email">Имя</label>
+                    <label for="name">Имя</label>
                     <input class="sign-up-input" type="text" name="name">
-                    <label for="email">Фамилия</label>
+                    <label for="surname">Фамилия</label>
                     <input class="sign-up-input" type="text" name="surname">
-                    <label for="email">Отчество</label>
+                    <label for="patronymic">Отчество</label>
                     <input class="sign-up-input" type="text" name="patronymic">
-                    <label for="email">Телефон</label>
+                    <label for="tel">Телефон</label>
                     <input class="sign-up-input" type="tel" name="tel">
                     <input class="sign-up-submit" type="submit" value="Зарегистрироваться">
                 </form>
@@ -106,14 +116,15 @@
             <button class="profile-exit">Закрыть</button>
             <h1>Профиль</h1>
             <div class="profile-form">
-                <form method="post" action="http://localhost:3210/edit">
-                    <label for="email">Имя</label>
+                <form method="post" action="http://localhost:3210/user/edit">
+                    <input class="profile-input" type="hidden" name="id" readonly>
+                    <label for="name">Имя</label>
                     <input class="profile-input" type="text" name="name">
-                    <label for="email">Фамилия</label>
+                    <label for="surname">Фамилия</label>
                     <input class="profile-input" type="text" name="surname">
-                    <label for="email">Отчество</label>
+                    <label for="patronymic">Отчество</label>
                     <input class="profile-input" type="text" name="patronymic">
-                    <label for="email">Телефон</label>
+                    <label for="tel">Телефон</label>
                     <input class="profile-input" type="tel" name="tel">
                     <input class="profile-submit" type="submit" value="Изменить">
                 </form>
@@ -125,9 +136,9 @@
         <div class="footer-info">
             <div class="footer-chapters">
                 <button class="footer-chapter"><a href="../mainPage/index.html">Главная</a></button>
-                <button class="footer-chapter"><a href="../carCatalog/carCatalog.html">Каталог автомобилей</a></button>
                 <button class="footer-chapter"><a href="">Мои автомобили</a></button>
                 <button class="footer-chapter"><a href="">Избранное</a></button>
+                <button class="footer-chapter"><a href="../contacts/contacts.html">Контакты</a></button>
                 <button class="footer-chapter"><a href="../aboutCompany/aboutCompany.html">О компании</a></button>
             </div>
             <div class="footer-contacts">
