@@ -1,10 +1,11 @@
 /* all header */
 .navigation{
+    margin:-8px;
 
-    width:100%;
+    width:106%;
     height:100px;
 
-    background:#10101f25;
+    background:#06060c80;
 
     filter:brightness(200%) !important;
 
@@ -28,8 +29,7 @@
     align-items: center;
 }
 .nav-button{
-    
-    background:#10101f25;
+    background:none;
 
     color:#ffffff;
 
@@ -50,7 +50,7 @@
 }
 /* button sign-in or information about user */
 .user-info{
-    margin-right:5%;
+    margin-right:10%;
 
     display:flex;
     justify-content: center;

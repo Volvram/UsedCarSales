@@ -1,16 +1,9 @@
 body{
-    background:#09090eef;
-}
-.background{
-
-    width:100%;
-    height:1000px;
-    
-    /* filter:brightness(70%); */
-
     background-image: url('../images/mercedes_benz_amg_gt_s_2016_vid_szadi_102848_1920x1080.jpg');
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 /* AboutCompany in the center */
 .about-company{
     margin:0 auto;
