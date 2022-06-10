@@ -7,6 +7,7 @@ function openModalWindow(modalWindow){
     modalWindow.style.flexDirection = "column";
 
     document.body.style.overflow = "hidden";
+    document.body.style.backdropFilter = "brightness(50%)";
     background.style.filter = "brightness(50%)";
 }
 

@@ -4,6 +4,7 @@ function closeModalWindow(modalWindow){
     modalWindow.style.display = "none";
 
     document.body.style.overflow = "";
+    document.body.style.backdropFilter = "brightness(100%)";
     background.style.filter = "brightness(100%)";
 }
 

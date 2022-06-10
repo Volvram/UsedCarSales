@@ -19,7 +19,7 @@ body{
     justify-content: space-around;
 }
 .car-choice{
-    padding:10px 5px;
+    padding:5px 5px;
 
     max-width: fit-content;
 
@@ -30,14 +30,36 @@ body{
     box-shadow: 3px 3px 10px 0px #000000;
 }
 .car-choice>a{
+    color:#000000;
+
     text-decoration: none;
 }
 .car-choice>a>img{
     border-radius: 8px;
 }
 .car-description{
-    width:min-content;
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    padding:2%;
+
+    border-bottom: 1px solid rgba(117, 117, 117, 0.5);
 
     display:flex;
     align-items: center;
+    justify-content: space-around;
+}
+.car-price{
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    padding:2%;
+
+    width:fit-content;
+
+    background:#09090eef;
+
+    border-radius: 20px;
+
+    color:#FFFFFF;
 }
