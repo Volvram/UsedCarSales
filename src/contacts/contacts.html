@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="../commonStyles/signIn.css">
     <link rel="stylesheet" href="../commonStyles/signUp.css">
     <link rel="stylesheet" href="../commonStyles/profile.css">
+    <link rel="stylesheet" href="../commonStyles/menu.css">
     <!--Scripts-->
     <script type="module" src="../scripts/signInModalWindow.js" defer></script>
     <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
-    <script src="../scripts/windowResize.js" defer></script>
+    <script type="module" src="../scripts/windowResize.js" defer></script>
     <script type="module" src="../scripts/processForm.js" defer></script>
     <script type="module" src="../scripts/checkUser.js" defer></script>
+    <script type="module" src="../scripts/processMenu.js" defer></script>
     <title>Купить, продать автомобиль</title>
 </head>
 <body>
@@ -45,6 +47,28 @@
             </div>
             <div class="user-info">
                 <button class="nav-button sign-in-button">Войти</button>
+            </div>
+        </div>
+
+        <div class="list">
+            <div class="list-button">
+                <a href="../mainPage/index.html">Главная</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="../carCatalog/carCatalog.html">Каталог автомобилей</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="">Мои автомобили</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="">Избранное</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="../aboutCompany/aboutCompany.html">О компании</a>
             </div>
         </div>
     </header>

@@ -12,20 +12,22 @@
     <link rel="stylesheet" href="../commonStyles/signUp.css">
     <link rel="stylesheet" href="../commonStyles/profile.css">
     <link rel="stylesheet" href="https://unpkg.com/flexboxgrid2@7.2.1/flexboxgrid2.css">
+    <link rel="stylesheet" href="../commonStyles/menu.css">
     <!--Scripts-->
     <script type="module" src="../scripts/signInModalWindow.js" defer></script>
     <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
-    <script src="../scripts/windowResize.js" defer></script>
+    <script type="module" src="../scripts/windowResize.js" defer></script>
     <script type="module" src="../scripts/processForm.js" defer></script>
     <script type="module" src="../scripts/checkUser.js" defer></script>
+    <script type="module" src="../scripts/processMenu.js" defer></script>
     <title>Купить, продать автомобиль</title>
 </head>
 <body>
     <header>
         <div class="navigation">
-            <div class="menu">
+            <button class="menu">
                 <img src="../images/menu.png" width="50px" height="50px">
-            </div>
+            </button>
             <div class="nav">
                 <button class="nav-button nav-chapter">
                     <a href="../mainPage/index.html">Главная</a>
@@ -46,6 +48,28 @@
             </div>
             <div class="user-info">
                 <button class="nav-button sign-in-button">Войти</button>
+            </div>
+        </div>
+        
+        <div class="list">
+            <div class="list-button">
+                <a href="../mainPage/index.html">Главная</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="">Мои автомобили</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="">Избранное</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="../contacts/contacts.html">Контакты</a>
+            </div>
+            <hr>
+            <div class="list-button">
+                <a href="../aboutCompany/aboutCompany.html">О компании</a>
             </div>
         </div>
     </header>
@@ -153,6 +177,7 @@
                 <button class="sign-up-button">Зарегистрироваться</button>
             </div>
         </div>
+
         <div class="sign-up">
             <button class="sign-up-exit">Закрыть</button>
             <h1>Регистрация</h1>
@@ -176,6 +201,7 @@
                 <button class="sign-in-modal-button">Войти</button>
             </div>
         </div>
+        
         <div class="profile">
             <button class="profile-exit">Закрыть</button>
             <h1>Профиль</h1>

@@ -10,6 +10,7 @@
     filter:brightness(200%) !important;
 
     display:flex;
+    align-items: center;
     justify-content: space-between;
 }
 /* menu button */
@@ -17,6 +18,14 @@
     display:none;
 
     margin-left:10%;
+
+    height: fit-content;
+
+    background: none;
+
+    border:0px;
+
+    cursor: pointer;
 }
 /* chapters of the site */
 .nav{
