@@ -8,7 +8,7 @@ function openMenu(){
     const menuStyle = getComputedStyle(menuButton);
 
     list.style.top = 25 + parseInt(menuButton.offsetHeight) + 'px';
-    list.style.left = parseInt(menuStyle.marginLeft) + parseInt(menuButton.offsetWidth) + 'px';
+    list.style.left = parseInt(menuStyle.marginLeft) + 'px';
 
     document.body.style.overflow = "hidden";
     document.body.style.backdropFilter = "brightness(50%)";

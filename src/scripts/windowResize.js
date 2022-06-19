@@ -12,7 +12,7 @@ function windowResize(){
 
     window.addEventListener('resize', (event) => {
         if (window.outerWidth <= '1100'){
-            //correct exit button
+            // Correct exit button
             signInExit.style.paddingTop = '1.5%';
             signInExit.style.paddingLeft = '1.5%';
             signInExit.style.paddingRight = '1.5%';
@@ -23,7 +23,7 @@ function windowResize(){
             signUpExit.style.paddingRight = '1.5%';
             signUpExit.style.paddingBottom = '1.5%';
         }else{
-            //correct exit button
+            // Correct exit button
             signInExit.style.paddingTop = '1%';
             signInExit.style.paddingLeft = '1%';
             signInExit.style.paddingRight = '1%';
@@ -37,7 +37,7 @@ function windowResize(){
 
         // correct menu list location
         const menuStyle = getComputedStyle(menuButton);
-        list.style.left = parseInt(menuStyle.marginLeft) + parseInt(menuButton.offsetWidth) + 'px';
+        list.style.left = parseInt(menuStyle.marginLeft) + 'px';
 
         if (menuStyle.display == 'none'){
             document.removeEventListener('click', clickOutsideMenu);
