@@ -6,17 +6,79 @@ body{
 /* Structure block */
 .structure{
     margin-top:10px;
+
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+/* Options block */
+.options{
+    margin-top:2%;
+    margin-left:auto;
+    margin-right:auto;
+    padding-left:5%;
+    padding-right:5%;
+
+    width: 90%;
+    height:fit-content;
+
+    background:#FFFFFF;
+
+    border-radius: 8px;
+
+    box-shadow: 3px 3px 10px 0px #000000;
+
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.options>select{
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    padding: 5px 5px;
+
+    min-width: 200px;
+
+    cursor:pointer;
+
+    border-radius: 8px;
+}
+.show{
+    margin-top: 2%;
+    margin-bottom: 2%;
+
+    padding:5px 10px;
+
+    width:fit-content;
+
+    cursor:pointer;
+
+    background:#09090eef;
+
+    border-radius: 20px;
+
+    font-size: 16px;
+
+    color:#FFFFFF;
 }
 /* Car choices */
 .container{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .cars{
+    margin-top: 2%;
+
     height:fit-content;
 }
-.car-choices{
-    display: flex; 
-    justify-content: space-around;
+.car-choices>div{
+    margin-top:2%;
+    margin-bottom:2%;
+
+    display:flex;
+    justify-content: center;
 }
 .car-choice{
     padding:5px 5px;
@@ -36,6 +98,9 @@ body{
 }
 .car-choice>a>img{
     border-radius: 8px;
+
+    width:260px;
+    height:325px;
 }
 .car-description{
     margin-top: 2%;
@@ -48,6 +113,10 @@ body{
     display:flex;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
+}
+.car-model{
+    max-width: fit-content;
 }
 .car-price{
     margin-top: 2%;
@@ -63,3 +132,4 @@ body{
 
     color:#FFFFFF;
 }
+
