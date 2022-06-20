@@ -1,8 +1,15 @@
 body{
+    margin: 0 auto;
+
+    max-width:1800px;
+
     background-image: url('../images/bmw_mashina_sportivnyj_1920x1080.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
-    backdrop-filter: brightness(100%);
+    background-position-x: center;
+    background-size: auto;
+
+    object-fit:cover;
 }
 /* Text in the center */
 .description{

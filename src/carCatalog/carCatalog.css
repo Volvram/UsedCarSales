@@ -1,7 +1,15 @@
 body{
+    margin: 0 auto;
+
+    max-width:1800px;
+
     background-image: url('../images/severalCars_90595_1920x1080.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position-x: center;
+    background-size: auto;
+
+    object-fit:cover;
 }
 /* Structure block */
 .structure{
@@ -70,12 +78,16 @@ body{
 }
 .cars{
     margin-top: 2%;
+    margin-bottom:2%;
 
-    height:fit-content;
+    min-width: fit-content;
 }
 .car-choices>div{
     margin-top:2%;
     margin-bottom:2%;
+
+    padding-left:2%;
+    padding-right:2%;
 
     display:flex;
     justify-content: center;
@@ -92,15 +104,31 @@ body{
     box-shadow: 3px 3px 10px 0px #000000;
 }
 .car-choice>a{
+    height:100%;
+
     color:#000000;
 
     text-decoration: none;
+
+    display:flex;
+    flex-direction: column;
 }
-.car-choice>a>img{
+.car-photo{
+    height: 100%;
+
+    background-color: #09090eef;
+
     border-radius: 8px;
 
-    width:260px;
-    height:325px;
+    display:flex;
+    align-items: center;
+}
+.car-photo>img{
+    object-fit:cover;
+
+    width:100%;
+
+    border-radius: 8px;
 }
 .car-description{
     margin-top: 2%;
@@ -133,3 +161,9 @@ body{
     color:#FFFFFF;
 }
 
+@media only screen and (max-width: 576px){
+    .container {
+        min-width: 280px;
+        max-width: 100%;
+    }
+}

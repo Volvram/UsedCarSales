@@ -1,7 +1,15 @@
 body{
+    margin: 0 auto;
+
+    max-width:1800px;
+
     background-image: url('../images/bmw_fary_podsvetka_137326_1920x1080.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
+    background-position-x: center;
+    background-size: auto;
+
+    object-fit:cover;
 }
 /* Contacts in the center */
 .contacts{

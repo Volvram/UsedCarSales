@@ -15,6 +15,28 @@ const router = app => {
         });
     });
 
+    app.get('/getCarCatalog', (request, response) => {
+
+        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.photo, cars.status, cars.type, cars.manufacture_year, cars.mileage, cars.body, cars.color, cars.engine_id, cars.tax, cars.transmission, cars.drive_unit, cars.steering_wheel, cars.owners_number, engines.volume, engines.power, engines.fuel_type, users.email, users.name, users.surname, users.patronymic, users.tel, users.type
+        FROM cars JOIN users
+        ON cars.owner_id = users.id
+        JOIN engines
+        ON cars.engine_id = engines.id
+        WHERE cars.status = 1`, (error, result) => {
+            if (error){
+                response.send({
+                    message: `Ошибка получения данных, попробуйте позже, ${error.message}`
+                });
+                return;
+            } else{
+                response.send({
+                    message: 'cars received',
+                    data: result
+                });
+            }
+        });
+    });
+
     // POST-запросы
     // Регистрация
     app.post('/register', signupValidation, (request, response, next) => {

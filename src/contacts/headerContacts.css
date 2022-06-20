@@ -1,11 +1,11 @@
 /* all header */
 .navigation{
-    margin:-8px;
+    margin:0 auto;
 
-    width:106%;
+    width:100%;
     height:100px;
 
-    background:#10101f25;
+    background:#06060c80;
 
     filter:brightness(200%) !important;
 
