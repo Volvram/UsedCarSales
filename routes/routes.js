@@ -17,11 +17,9 @@ const router = app => {
 
     app.get('/getCarCatalog', (request, response) => {
 
-        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.photo, cars.status, cars.type, cars.manufacture_year, cars.mileage, cars.body, cars.color, cars.engine_id, cars.tax, cars.transmission, cars.drive_unit, cars.steering_wheel, cars.owners_number, engines.volume, engines.power, engines.fuel_type, users.email, users.name, users.surname, users.patronymic, users.tel, users.type
-        FROM cars JOIN users
-        ON cars.owner_id = users.id
-        JOIN engines
-        ON cars.engine_id = engines.id
+        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, images.directory, images.name, images.extension, images.role
+        FROM cars JOIN images
+        ON cars.id = images.car_id
         WHERE cars.status = 1`, (error, result) => {
             if (error){
                 response.send({
@@ -29,6 +27,19 @@ const router = app => {
                 });
                 return;
             } else{
+                result = result.map((car, index) => {
+                    let res = {};
+                    let photo = '';
+                    photo = car.directory + car.name + car.extension;
+                    for (let key in car){
+                        if (key != 'directory' && key != 'name' && key != 'extension'){
+                            res[key] = car[key];
+                        }
+                    }
+                    res.photo = photo;
+                    return res;
+                });
+                
                 response.send({
                     message: 'cars received',
                     data: result
