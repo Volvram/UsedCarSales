@@ -2,12 +2,14 @@
 .sign-up{
     display:none;
 
+    padding-bottom:4%;
+
     position:absolute;
 
-    height:700px;
+    height:fit-content;
     width:50%;
 
-    top:20%;
+    top:15%;
     left:25%;
 
     background:#09090eef;
@@ -89,10 +91,13 @@
 }
 @media screen and (max-width:670px) {
     .sign-up{
-        height:805px;
+        height:100%;
         width:99%;
 
         top:0%;
         left:0%;
+    }
+    .sign-up-exit{
+        padding:1.5%;
     }
 }

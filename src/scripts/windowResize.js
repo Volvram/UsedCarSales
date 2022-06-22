@@ -11,30 +11,6 @@ function windowResize(){
     const list = document.querySelector('.list');
 
     window.addEventListener('resize', (event) => {
-        if (window.outerWidth <= '1100'){
-            // Correct exit button
-            signInExit.style.paddingTop = '1.5%';
-            signInExit.style.paddingLeft = '1.5%';
-            signInExit.style.paddingRight = '1.5%';
-            signInExit.style.paddingBottom = '1.5%';
-
-            signUpExit.style.paddingTop = '1.5%';
-            signUpExit.style.paddingLeft = '1.5%';
-            signUpExit.style.paddingRight = '1.5%';
-            signUpExit.style.paddingBottom = '1.5%';
-        }else{
-            // Correct exit button
-            signInExit.style.paddingTop = '1%';
-            signInExit.style.paddingLeft = '1%';
-            signInExit.style.paddingRight = '1%';
-            signInExit.style.paddingBottom = '1%';
-
-            signUpExit.style.paddingTop = '1%';
-            signUpExit.style.paddingLeft = '1%';
-            signUpExit.style.paddingRight = '1%';
-            signUpExit.style.paddingBottom = '1%';
-        }
-
         // correct menu list location
         const menuStyle = getComputedStyle(menuButton);
         list.style.left = parseInt(menuStyle.marginLeft) + 'px';

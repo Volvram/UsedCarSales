@@ -1,9 +1,11 @@
 .profile{
     display:none;
 
+    padding-bottom: 4%;
+
     position:absolute;
 
-    height:550px;
+    height:fit-content;
     width:50%;
 
     top:20%;
@@ -88,10 +90,13 @@
 }
 @media screen and (max-width:670px) {
     .profile{
-        height:805px;
+        height:100%;
         width:99%;
 
         top:0%;
         left:0%;
+    }
+    .profile-exit{
+        padding:1.5%;
     }
 }
