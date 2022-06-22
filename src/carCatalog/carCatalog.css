@@ -78,7 +78,7 @@ body{
 }
 .cars{
     margin-top: 2%;
-    margin-bottom:2%;
+    margin-bottom:4%;
 
     min-width: fit-content;
 }
@@ -159,6 +159,8 @@ body{
     border-radius: 20px;
 
     color:#FFFFFF;
+
+    align-self: flex-end;
 }
 
 @media only screen and (max-width: 576px){
