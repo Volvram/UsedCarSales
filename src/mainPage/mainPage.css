@@ -1,7 +1,7 @@
 body{
     margin: 0 auto;
 
-    max-width:1800px;
+    max-width:1920px;
 
     background-image: url('../images/bmw_mashina_sportivnyj_1920x1080.jpg');
     background-repeat: no-repeat;
@@ -13,10 +13,7 @@ body{
 }
 /* Text in the center */
 .description{
-    margin-top:4%;
-    margin-bottom:4%;
-
-    height:600px;
+    min-height: 830px;
 
     color:#ffffff;
 
