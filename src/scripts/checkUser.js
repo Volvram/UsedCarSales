@@ -1,4 +1,5 @@
 import renderUserInfo from "./renderUserInfo.js";
+import getMyCars from './getMyCars.js';
 
 function checkUser(){
     async function userRequest(){
@@ -15,10 +16,17 @@ function checkUser(){
         let json = await response.json();
 
         if (json.error == true){
+            if (location.href == 'http://localhost:3210/myCars/myCars.html'){
+                alert('Войдите, чтобы видеть свои автомобили');
+            }
             console.log(json.message);
         }else{
             let user = json.user;
             renderUserInfo(user);
+
+            if (location.href == 'http://localhost:3210/myCars/myCars.html'){
+                getMyCars(user.id);
+            }
         }
     }
     userRequest();

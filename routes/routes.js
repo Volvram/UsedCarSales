@@ -48,6 +48,40 @@ const router = app => {
         });
     });
 
+    app.get('/getMyCars/:id', (request, response) => {
+        const id = request.params.id;
+
+        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, images.directory, images.name, images.extension, images.role
+        FROM cars JOIN images
+        ON cars.id = images.car_id
+        WHERE cars.owner_id = ${id}`,(error, result) => {
+            if (error){
+                response.send({
+                    message: `Ошибка получения данных, попробуйте позже, ${error.message}`
+                });
+                return;
+            } else{
+                result = result.map((car, index) => {
+                    let res = {};
+                    let photo = '';
+                    photo = car.directory + car.name + car.extension;
+                    for (let key in car){
+                        if (key != 'directory' && key != 'name' && key != 'extension'){
+                            res[key] = car[key];
+                        }
+                    }
+                    res.photo = photo;
+                    return res;
+                });
+                
+                response.send({
+                    message: 'cars received',
+                    data: result
+                });
+            }
+        });
+    });
+
     // POST-запросы
     // Регистрация
     app.post('/register', signupValidation, (request, response, next) => {
