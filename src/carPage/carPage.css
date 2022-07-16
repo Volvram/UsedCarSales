@@ -1,0 +1,23 @@
+body{
+    margin: 0 auto;
+
+    max-width:1920px;
+
+    /* background-image: url('../images/bmw_mashina_sportivnyj_1920x1080.jpg'); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position-x: center;
+    background-size: auto;
+
+    object-fit:cover;
+}
+
+.content{
+    margin-top:10px;
+
+    min-height: 830px;
+
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}

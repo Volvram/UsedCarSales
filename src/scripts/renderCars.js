@@ -23,7 +23,7 @@ function renderCars(carsInfo, place){
         card.classList.add("col-xs-12");
 
         card.innerHTML = `<div class="car-choice">
-                                <a href="">
+                                <a href="../carPage/carPage.html">
                                     <div class="car-photo" id="${car.id}"><img src="${car.photo}"></div>
                                     <div class="car-description">
                                         <div class="car-mark">${car.mark}</div>
