@@ -12,6 +12,7 @@ body{
     object-fit:cover;
 }
 
+/* Main content */
 .content{
     margin-top:10px;
 
@@ -20,4 +21,24 @@ body{
     display:flex;
     align-items: center;
     flex-direction: column;
+}
+
+.content-title {
+
+}
+
+.content-title-mark {
+    
+}
+
+.content-title-model {
+    
+}
+
+.content-price {
+
+}
+
+.content-image {
+
 }
