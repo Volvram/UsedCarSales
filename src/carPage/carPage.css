@@ -14,31 +14,91 @@ body{
 
 /* Main content */
 .content{
-    margin-top:10px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 4%;
+    padding-right: 4%;
 
     min-height: 830px;
 
+    background-color:#1d1d1d;
+
+    border-top: 1px solid #e9ac06;
+    border-bottom: 1px solid #e9ac06;
+
+    color: #ffffff;
+
     display:flex;
-    align-items: center;
     flex-direction: column;
 }
 
 .content-title {
+    margin-bottom: 4%;
 
+    width: 100%;
+    max-width: 1300px;
+
+    font-size: 28px;
+
+    display: flex;
 }
 
 .content-title-mark {
-    
+    margin-left: 2%;
 }
 
 .content-title-model {
-    
+    margin-left: 5%;
 }
 
-.content-price {
+.content-title-price {
+    margin-left: auto;
+    margin-right: 2%;
+}
 
+.content-body {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
 }
 
 .content-image {
+    max-height: 600px;
 
+    border: 2px solid #e9ac06;
+}
+
+.content-characteristics {
+    margin-left: 5%;
+
+    padding-top: 1%;
+
+    width: 100%;
+    max-width: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.content-characteristic {
+    margin-bottom: 15px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #ffffff;
+
+    font-size: 18px;
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+.label {
+
+}
+
+.value {
+    text-align: right;
 }

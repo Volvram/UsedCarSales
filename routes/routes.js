@@ -51,10 +51,19 @@ const router = app => {
     app.get('/getCar', (request, response) => {
         const id = request.query.id;
 
-        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, images.directory, images.name, images.extension, images.role
-        FROM cars JOIN images
-        ON cars.id = images.car_id
-        WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
+        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, cars.type, cars.manufacture_year, 
+cars.mileage, cars.body, cars.color, cars.engine_id, cars.tax, cars.transmission, cars.drive_unit, cars.steering_wheel, 
+cars.owners_number, users.id, users.email, users.name, users.surname, users.patronymic, users.tel, 
+engines.id, engines.volume, engines.power, engines.fuel_type, 
+images.directory, images.name, images.extension, images.role
+
+FROM cars JOIN users
+ON cars.owner_id = users.id
+JOIN engines
+ON cars.engine_id = engines.id
+JOIN images
+ON cars.id = images.car_id
+WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
             if (error){
                 response.send({
                     message: `Ошибка получения данных, попробуйте позже, ${error.message}`
