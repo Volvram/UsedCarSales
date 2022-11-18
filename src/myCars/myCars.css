@@ -22,7 +22,7 @@ body{
     flex-direction: column;
 }
 /* Options block */
-.options{
+.panel{
     margin-top:2%;
     margin-left:auto;
     margin-right:auto;
@@ -38,41 +38,30 @@ body{
 
     box-shadow: 3px 3px 10px 0px #000000;
 
-    display:flex;
+    display:none;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
 }
-.options>select{
+.add-advert{
     margin-top: 2%;
     margin-bottom: 2%;
 
-    padding: 5px 5px;
-
-    min-width: 200px;
+    padding: 8px 16px;
 
     cursor:pointer;
-
-    border-radius: 8px;
-}
-.show{
-    margin-top: 2%;
-    margin-bottom: 2%;
-
-    padding:5px 10px;
 
     width:fit-content;
-
-    cursor:pointer;
 
     background:#09090eef;
 
     border-radius: 20px;
 
-    font-size: 16px;
-
     color:#FFFFFF;
+
+    font-size: 20px;
 }
+
 /* Car choices */
 .container{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

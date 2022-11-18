@@ -17,6 +17,10 @@ function processForm(){
     const profile = document.querySelector('.profile');
     const profileForm = document.querySelector('.profile-form>form');
     const profileInputs = document.querySelectorAll('.profile-input');
+    // Add advert
+    const addCar = document.querySelector('.add-car');
+    const addCarForm = document.querySelector('.add-car-form>form');
+    const addCarInputs = document.querySelectorAll('.add-car-input');
 
     // Processing login form
     signInForm.addEventListener('submit', (event) => {
@@ -89,6 +93,52 @@ function processForm(){
         }, (response) => {
             alert(response.message);
         });
+    })
+
+    // ДОРАБОТАТЬ
+    addCarForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        async function userRequest(){
+            let token = localStorage.getItem('token');
+            let response = await fetch('http://localhost:3210/get-user', {
+                method: 'POST',
+                headers:{
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'authorization': `Bearer ${token}`
+                },
+                body:JSON.stringify({})
+            });
+    
+            let json = await response.json();
+
+            if (json.error == true){
+                console.log(json.message);
+            } else {
+                const user = json.user;
+
+                let link = event.target.action;
+                let sendingObject = {};
+                sendingObject.owner_id = user.id;
+
+                // Доделать отправку изображения
+                addCarInputs.forEach(input => {
+                    sendingObject[input.name] = input.value;
+                })
+
+                console.log(JSON.stringify(sendingObject));
+
+                // СДЕЛАТЬ БЭК
+                // sendAddCarRequest(link, sendingObject)
+                // .then((response) => {
+                //     alert(response.message);
+                //     closeModalWindow(addCar);
+                // }, (response) => {
+                //     alert(response.message);
+                // });
+            }
+        }
+        userRequest();
     })
 }
 

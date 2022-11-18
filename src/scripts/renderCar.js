@@ -20,7 +20,7 @@ function renderCar(carInfo) {
 
     const mileage = numberFormatter.format(car.mileage);
 
-    // !!!! НУЖНЫ КАРТИНКИ ОДНОЙ РАЗМЕРНОСТИ
+    const tel = car.tel.substr(0,1) + ' (' + car.tel.substr(1, 3) + ') ' + car.tel.substr(4, 3) + '-' + car.tel.substr(7,2) + '-' + car.tel.substr(9,2);
 
     // Here is render all the info about car
     content.innerHTML = `  <div class="content-title">
@@ -84,7 +84,12 @@ function renderCar(carInfo) {
                                     <div class="value">${car.fuel_type}</div>
                                 </div>
                             </div>
-                            
+                        </div>
+                        <div class="content-phone">
+                            Телефон владельца:
+                            <a href="tel:${car.tel}">
+                                ${tel}
+                            </a>
                         </div>
                     `;
 }

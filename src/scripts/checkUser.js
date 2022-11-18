@@ -18,6 +18,8 @@ function checkUser(){
         if (json.error == true){
             if (location.href == 'http://localhost:3210/myCars/myCars.html'){
                 alert('Войдите, чтобы видеть свои автомобили');
+                const panel = document.querySelector(".panel");
+                panel.style.display = "none";
             }
             console.log(json.message);
         }else{
@@ -25,6 +27,8 @@ function checkUser(){
             renderUserInfo(user);
 
             if (location.href == 'http://localhost:3210/myCars/myCars.html'){
+                const panel = document.querySelector(".panel");
+                panel.style.display = "flex";
                 getMyCars(user.id);
             }
         }

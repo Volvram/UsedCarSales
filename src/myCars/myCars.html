@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="../commonStyles/profile.css">
     <link rel="stylesheet" href="https://unpkg.com/flexboxgrid2@7.2.1/flexboxgrid2.css">
     <link rel="stylesheet" href="../commonStyles/menu.css">
+    <link rel="stylesheet" href="addCar.css">
     <!--Scripts-->
     <script type="module" src="../scripts/signInModalWindow.js" defer></script>
     <script type="module" src="../scripts/signUpModalWindow.js" defer></script>
     <script type="module" src="../scripts/windowResize.js" defer></script>
     <script type="module" src="../scripts/processForm.js" defer></script>
     <script type="module" src="../scripts/processMenu.js" defer></script>
+    <script type="module" src="../scripts/addAdvertModalWindow.js" defer></script>
     <title>Купить, продать автомобиль</title>
 </head>
 <body>
@@ -68,46 +70,114 @@
     <main>
         <div class="background">
             <div class="structure">
-                <!-- <div class="options">
-                    <select class="mark">
-                        <option>Марка</option>
-                        <option>BMW</option>
-                        <option>Mercedes-Benz</option>
-                        <option>Audi</option>
-                        <option>Kia</option>
-                    </select>
-                    <select class="type">
-                        <option>Тип</option>
-                        <option>Легковые автомобили</option>
-                        <option>Грузовые автомобили</option>
-                        <option>Мото</option>
-                    </select>
-                    <select class="body">
-                        <option>Кузов</option>
-                        <option>Седан</option>
-                        <option>Внедорожник</option>
-                        <option>Купе</option>
-                        <option>Пикап</option>
-                    </select>
-                    <select class="transmission">
-                        <option>Коробка</option>
-                        <option>Автоматическая</option>
-                        <option>Механическая</option>
-                        <option>Роботизированная</option>
-                    </select>
-                    <select class="drive-unit">
-                        <option>Привод</option>
-                        <option>Передний</option>
-                        <option>Задний</option>
-                        <option>Полный</option>
-                    </select>
-                    <button class="show">Показать</button> -->
-                </div>
-                <div class="container cars">
-                    <div class="row car-choices">
-    
+                    <div class="panel">
+                        <div class="add-advert">
+                            Добавить объявление
+                        </div>
                     </div>
-                </div>
+                    <div class="container cars">
+                        <div class="row car-choices">
+        
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="add-car">
+            <button class="add-car-exit">Закрыть</button>
+            <h1>Добавить объявление</h1>
+            <div class="add-car-form">
+                <form method="post" action="http://localhost:3210/addCar" enctype="multipart/form-data">
+                    <div class="fields-container">
+                        <input type="hidden" name="id">
+                        <div class="add-car-field">
+                            <label for="mark">Марка</label>
+                            <input class="add-car-input" type="text" name="mark">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="model">Модель</label>
+                            <input class="add-car-input" type="text" name="model">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="type">Тип (Легковой/грузовой автомобиль)</label>
+                            <input class="add-car-input" type="text" name="type">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="manufacture_year">Год выпуска</label>
+                            <input class="add-car-input" type="text" name="manufacture_year">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="mileage">Пробег (Км)</label>
+                            <input class="add-car-input" type="text" name="mileage">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="body">Кузов (седан/купе)</label>
+                            <input class="add-car-input" type="text" name="body">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="color">Цвет</label>
+                            <input class="add-car-input" type="text" name="color">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="tax">Годовой налог (в рублях)</label>
+                            <input class="add-car-input" type="text" name="tax">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="transmission">Коробка передач (механическая/автоматическая/роботизированная)</label>
+                            <input class="add-car-input" type="text" name="transmission">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="drive_unit">Привод (передний/задний/полный)</label>
+                            <input class="add-car-input" type="text" name="drive_unit">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="steering_wheel">Руль (левый/правый)</label>
+                            <input class="add-car-input" type="text" name="steering_wheel">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="owners_number">Количество владельцев</label>
+                            <input class="add-car-input" type="text" name="owners_number">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="volume">Объём двигателя (л)</label>
+                            <input class="add-car-input" type="text" name="volume">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="power">Мощность двигателя (л.с.)</label>
+                            <input class="add-car-input" type="text" name="power">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="fuel_type">Тип топлива (бензин/дизель)</label>
+                            <input class="add-car-input" type="text" name="fuel_type">
+                        </div>
+                        
+                        <div class="add-car-field">
+                            <label for="price">Цена (в рублях)</label>
+                            <input class="add-car-input" type="text" name="price">
+                        </div>
+
+                        <div class="add-car-field">
+                            <label for="photo">Изображение (1920х1080)</label>
+                            <input class="add-car-input" type="file" name="photo">
+                        </div>
+                    </div>
+                    
+                    <input class="add-car-submit" type="submit" value="Отправить">
+                </form>
             </div>
         </div>
         

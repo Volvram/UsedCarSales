@@ -36,7 +36,6 @@ body{
     margin-bottom: 4%;
 
     width: 100%;
-    max-width: 1300px;
 
     font-size: 28px;
 
@@ -64,9 +63,8 @@ body{
 }
 
 .content-image {
-    max-height: 600px;
-
-    border: 2px solid #e9ac06;
+    max-width: 1024px;
+    object-fit: contain;
 }
 
 .content-characteristics {
@@ -75,7 +73,6 @@ body{
     padding-top: 1%;
 
     width: 100%;
-    max-width: 600px;
 
     display: flex;
     flex-direction: column;
@@ -101,4 +98,23 @@ body{
 
 .value {
     text-align: right;
+}
+
+.content-phone {
+    margin-top: 20px;
+    padding: 6px 12px;
+
+    width: fit-content;
+
+    background-color: #ffffff;
+
+    border-radius: 20px;
+
+    color: #000000;
+
+    font-size: 28px;
+}
+
+.content-phone>a{
+    color: #000000;
 }
