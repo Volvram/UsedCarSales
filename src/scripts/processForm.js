@@ -3,6 +3,7 @@ import sendRegisterRequest from "./sendRegisterRequest.js";
 import sendUserEditRequest from "./sendUserEditRequest.js";
 import closeModalWindow from "./closeModalWindow.js";
 import checkUser from "./checkUser.js";
+import sendCarAddRequest from "./sendCarAddRequest.js";
 
 function processForm(){
     // Sign in
@@ -117,25 +118,40 @@ function processForm(){
             } else {
                 const user = json.user;
 
+                // Request link
                 let link = event.target.action;
-                let sendingObject = {};
-                sendingObject.owner_id = user.id;
 
-                // Доделать отправку изображения
+                // Creating sending object
+                const formdata = new FormData();
+                formdata.append("owner_id", user.id);
                 addCarInputs.forEach(input => {
-                    sendingObject[input.name] = input.value;
-                })
+                    if (input.name === "photo") {
+                        formdata.append("file", input.files[0]);
+                    }else {
+	                    formdata.append(input.name, input.value);
+                    }
+                });
 
-                console.log(JSON.stringify(sendingObject));
+                // ДОДЕЛАТЬ ПРОВЕРКУ ДАННЫХ
+                let empty = false;
+                for (let [key, value] of formdata.entries()) {
+                    if (!value) {
+                        empty = true;
+                    }
+                }
+
+                if (empty) {
+                    alert("Заполните пустые поля");
+                }
 
                 // СДЕЛАТЬ БЭК
-                // sendAddCarRequest(link, sendingObject)
-                // .then((response) => {
-                //     alert(response.message);
-                //     closeModalWindow(addCar);
-                // }, (response) => {
-                //     alert(response.message);
-                // });
+                sendCarAddRequest(link, formdata)
+                .then((response) => {
+                    alert(response.message);
+                    closeModalWindow(addCar);
+                }, (response) => {
+                    alert(response.message);
+                });
             }
         }
         userRequest();

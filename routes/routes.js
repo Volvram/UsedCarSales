@@ -5,6 +5,24 @@ const { validationResult } = require('express-validator');  // Результа�
 const bcrypt = require('bcryptjs');  // Хэширование паролей
 const jwt = require('jsonwebtoken');  // Json-web token для отправки данных после авторизации
 
+const path = require("path");  //npm install path
+const fs = require("fs");
+
+// Form data handler
+const multer = require("multer");
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'src/uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+})
+const upload = multer({storage: storage});
+
+// const upload = multer();
+
 const router = app => {
 
     // GET-запросы
@@ -128,7 +146,6 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
     // POST-запросы
     // Регистрация
     app.post('/register', signupValidation, (request, response, next) => {
-        console.log(request.body);
         for (let key in request.body){
             if (request.body[key] == null && key != 'patronymic'){
                 response.send({
@@ -186,9 +203,6 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
                 });
             }
 
-            console.log('user:');
-            console.log(result);
-
             // check password
             // For admin
             if (result[0]['email'] == 'admin@mail.ru'){
@@ -217,7 +231,7 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
                 }
             
                 if (bResult) {
-                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '15m' });
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '30m' });
                     pool.query(`UPDATE used_car_sales.users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
@@ -259,6 +273,28 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
             });
         }
     });
+
+    // Создание нового объявления об автомобиле
+    // ДОДЕЛАТЬ
+    app.post("/addCar", upload.single('file'), (request, response) => {
+        console.log(request.body);
+        console.log(request.file);
+
+        // Parts of the photo
+        const arr = request.file.originalname.split('.');
+        const extension = "."+arr[arr.length-1];
+        const name = arr[arr.length-2];
+
+        // Re-load photo from the temp dir to real dir
+        const photo = fs.readFileSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
+        fs.writeFileSync(path.join(__dirname, `..\\src\\carPhotos\\${name}_${request.body.owner_id}${extension}`), photo);
+        fs.unlinkSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
+
+        response.send({
+            error: false,
+            message: "Автомобиль успешно добавлен",
+        })
+    })
 
     // PUT-запросы
     app.put('/user/edit', (request, response) => {
