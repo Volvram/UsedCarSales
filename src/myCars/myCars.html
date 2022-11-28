@@ -107,16 +107,16 @@
                         
                         <div class="add-car-field">
                             <label for="manufacture_year">Год выпуска</label>
-                            <input class="add-car-input" type="text" name="manufacture_year">
+                            <input class="add-car-input" type="text" name="manufacture_year" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;">
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="mileage">Пробег (Км)</label>
-                            <input class="add-car-input" type="text" name="mileage">
+                            <label for="mileage">Пробег Км</label>
+                            <input class="add-car-input" type="text" name="mileage" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;">
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="body">Кузов (седан/купе)</label>
+                            <label for="body">Кузов (седан/купе/пикап/хэтчбек/внедорожник/универсал/минивэн)</label>
                             <input class="add-car-input" type="text" name="body">
                         </div>
                         
@@ -126,8 +126,8 @@
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="tax">Годовой налог (в рублях)</label>
-                            <input class="add-car-input" type="text" name="tax">
+                            <label for="tax">Годовой налог в рублях</label>
+                            <input class="add-car-input" type="text" name="tax" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;">
                         </div>
                         
                         <div class="add-car-field">
@@ -147,16 +147,16 @@
                         
                         <div class="add-car-field">
                             <label for="owners_number">Количество владельцев</label>
-                            <input class="add-car-input" type="text" name="owners_number">
+                            <input class="add-car-input" type="text" name="owners_number" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;">
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="volume">Объём двигателя (л)</label>
-                            <input class="add-car-input" type="text" name="volume">
+                            <label for="volume">Объём двигателя л</label>
+                            <input class="add-car-input" type="text" name="volume" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;">
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="power">Мощность двигателя (л.с.)</label>
+                            <label for="power">Мощность двигателя л.с.</label>
                             <input class="add-car-input" type="text" name="power">
                         </div>
                         
@@ -166,12 +166,12 @@
                         </div>
                         
                         <div class="add-car-field">
-                            <label for="price">Цена (в рублях)</label>
+                            <label for="price">Цена в рублях</label>
                             <input class="add-car-input" type="text" name="price">
                         </div>
 
                         <div class="add-car-field">
-                            <label for="photo">Изображение (1920х1080)</label>
+                            <label for="photo">Изображение 1920х1080/1200х900</label>
                             <input class="add-car-input" type="file" name="photo">
                         </div>
                     </div>

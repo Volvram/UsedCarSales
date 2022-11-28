@@ -231,7 +231,7 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
                 }
             
                 if (bResult) {
-                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '30m' });
+                    const token = jwt.sign({id:result[0].id},'the-super-strong-secrect',{ expiresIn: '1h' });
                     pool.query(`UPDATE used_car_sales.users SET last_login = now() WHERE id = '${result[0].id}'`);
                     return response.status(200).send({
                         message: 'Авторизация пройдена!',
@@ -275,7 +275,6 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
     });
 
     // Создание нового объявления об автомобиле
-    // ДОДЕЛАТЬ
     app.post("/addCar", upload.single('file'), (request, response) => {
         console.log(request.body);
         console.log(request.file);
@@ -287,14 +286,52 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
 
         // Re-load photo from the temp dir to real dir
         const photo = fs.readFileSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
-        fs.writeFileSync(path.join(__dirname, `..\\src\\carPhotos\\${name}_${request.body.owner_id}${extension}`), photo);
+        const newName = `${name}_${request.body.owner_id}_${new Date()}`;
+        fs.writeFileSync(path.join(__dirname, `..\\src\\carPhotos\\${newName}${extension}`), photo);
         fs.unlinkSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
 
-        response.send({
-            error: false,
-            message: "Автомобиль успешно добавлен",
-        })
-    })
+        let object = {}
+
+        for (let key in request.body) {
+            if (!isNaN(request.body[key])) {
+                object[key] = Number(request.body[key]);
+            }else {
+                object[key] = request.body[key];
+            }
+            console.log(`${key}: ${object[key]}, type=${typeof object[key]}`);
+        }
+
+        pool.query(`INSERT INTO used_car_sales.engines (volume, power, fuel_type) 
+        VALUES (${object.volume}, ${object.power}, '${object.fuel_type}')`,(error, result) => { 
+            if (error) {
+                console.log(error);
+                response.send({error: true, message: "Что-то пошло не так, попробуйте позже"});
+                return;
+            }
+            const lastEngineId = result.insertId;
+
+            pool.query(`INSERT INTO used_car_sales.cars (owner_id, mark, model, price, status, type, manufacture_year, mileage, body, color, engine_id, tax, transmission, drive_unit, steering_wheel, owners_number) 
+            VALUES (${object.owner_id}, '${object.mark}', '${object.model}', ${object.price}, 1, '${object.type}', ${object.manufacture_year}, ${object.mileage}, '${object.body}', '${object.color}', ${lastEngineId}, ${object.tax}, '${object.transmission}', '${object.drive_unit}', '${object.steering_wheel}', ${object.owners_number});`, (err, res) => {
+                if (err) {
+                    console.log(error);
+                    response.send({error: true, message: "Что-то пошло не так, попробуйте позже"});
+                    return;
+                }
+                const lastCarId = res.insertId;
+
+                pool.query(`INSERT INTO used_car_sales.images (directory, name, extension, role, car_id) 
+                VALUES ('../carPhotos/', '${newName}', '${extension}', 'main', ${lastCarId})`, (e, r) => {
+                    if (e) {
+                        response.send({error: true, message: "Что-то пошло не так, попробуйте позже"});
+                        return;
+                    } else {
+                        response.send({error: false, message: "Автомобиль успешно добавлен"});
+                        return;
+                    }
+                });
+            });
+        });
+    });
 
     // PUT-запросы
     app.put('/user/edit', (request, response) => {

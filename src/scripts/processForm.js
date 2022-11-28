@@ -127,7 +127,7 @@ function processForm(){
                 addCarInputs.forEach(input => {
                     if (input.name === "photo") {
                         formdata.append("file", input.files[0]);
-                    }else {
+                    } else {
 	                    formdata.append(input.name, input.value);
                     }
                 });
