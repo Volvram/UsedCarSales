@@ -132,26 +132,39 @@ function processForm(){
                     }
                 });
 
-                // ДОДЕЛАТЬ ПРОВЕРКУ ДАННЫХ
                 let empty = false;
+                let wrong = false;
                 for (let [key, value] of formdata.entries()) {
+                    const val = value.toLowerCase();
                     if (!value) {
                         empty = true;
+                        break;
+                    } else if ((key === "type" && (val !== "легковой автомобиль" || val !== "грузовой автомобиль"))
+                                || (key === "body" && (val !== "седан" || val !== "купе" || val !== "пикап" || val !== "внедорожник" || val !== "универсал" || val !== "минивэн")
+                                || (key === "transmission" && (val!== "механическая" || val !== "автоматическая" || val !== "роботизированная"))
+                                || (key === "drive_unit" && (val !== "передний" || val !== "задний" || val !== "полный"))
+                                || (key === "steering_wheel" && (val !== "левый" || val !== "правый"))
+                                || (key === "fuel_type" && (val !== "бензин" || val !== "дизель")))) {
+                        wrong = true;
+                        break;
                     }
+                    console.log(`${key}: ${value}`);
                 }
 
                 if (empty) {
                     alert("Заполните пустые поля");
+                } else if (wrong) {
+                    alert("Неверные данные (в полях, где есть примеры в скобках должно быть одно из указанных значений)");
+                } else {
+                    // sending car data to save in database
+                    sendCarAddRequest(link, formdata)
+                    .then((response) => {
+                        alert(response.message);
+                        closeModalWindow(addCar);
+                    }, (response) => {
+                        alert(response.message);
+                    });
                 }
-
-                // СДЕЛАТЬ БЭК
-                sendCarAddRequest(link, formdata)
-                .then((response) => {
-                    alert(response.message);
-                    closeModalWindow(addCar);
-                }, (response) => {
-                    alert(response.message);
-                });
             }
         }
         userRequest();
