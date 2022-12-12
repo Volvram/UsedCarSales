@@ -2,6 +2,8 @@ import openModalWindow from "./openModalWindow.js";
 import closeModalWindow from "./closeModalWindow.js";
 import sendUserDeleteRequest from "./sendUserDeleteRequest.js";
 
+import host from "../config/host.js";
+
 function renderUserInfo(user){
     const userInfo = document.querySelector('.user-info');
     const signInButton = document.querySelector('.sign-in-button');
@@ -58,7 +60,7 @@ function renderUserInfo(user){
                 } 
             });
 
-            sendUserDeleteRequest('http://localhost:3210/user/delete', {id:valueId})
+            sendUserDeleteRequest(`${host}user/delete`, {id:valueId})
             .then((response) => {
                 localStorage.removeItem('token');
                 location.reload();

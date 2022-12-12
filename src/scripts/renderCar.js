@@ -1,3 +1,6 @@
+import sendCarDeleteRequest from "./sendCarDeleteRequest.js";
+import userRequest from "./userRequest.js";
+
 function renderCar(carInfo) {
     const car = carInfo[0];
 
@@ -92,6 +95,24 @@ function renderCar(carInfo) {
                             </a>
                         </div>
                     `;
+    userRequest()
+    .then(user => {
+        if (user && car.owner_id == user.id) {
+            const contentPhone = document.querySelector(".content-phone");
+            let deleteButton = document.createElement('button');
+            deleteButton.classList.add("delete-car-button");
+            deleteButton.innerText = "Удалить объявление";
+            contentPhone.after(deleteButton);
+
+            deleteButton.addEventListener('click', (event) => {
+                const del = confirm("Уверены, что хотите удалить объявление? Изменения необратимы.");
+                if (del) {
+                    sendCarDeleteRequest(car.id);
+                }
+            });
+        }
+    });
+    
 }
 
 export default renderCar;

@@ -69,7 +69,7 @@ const router = app => {
     app.get('/getCar', (request, response) => {
         const id = request.query.id;
 
-        pool.query(`SELECT cars.id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, cars.type, cars.manufacture_year, 
+        pool.query(`SELECT cars.id as id, cars.owner_id, cars.mark, cars.model, cars.price, cars.status, cars.type, cars.manufacture_year, 
 cars.mileage, cars.body, cars.color, cars.engine_id, cars.tax, cars.transmission, cars.drive_unit, cars.steering_wheel, 
 cars.owners_number, users.id, users.email, users.name, users.surname, users.patronymic, users.tel, 
 engines.id, engines.volume, engines.power, engines.fuel_type, 
@@ -276,8 +276,7 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
 
     // Создание нового объявления об автомобиле
     app.post("/addCar", upload.single('file'), (request, response) => {
-        console.log(request.body);
-        console.log(request.file);
+        // console.log(request.file);
 
         // Parts of the photo
         const arr = request.file.originalname.split('.');
@@ -286,7 +285,7 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
 
         // Re-load photo from the temp dir to real dir
         const photo = fs.readFileSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
-        const newName = `${name}_${request.body.owner_id}_${new Date()}`;
+        const newName = `${name}_${request.body.owner_id}_${Math.random()}`;
         fs.writeFileSync(path.join(__dirname, `..\\src\\carPhotos\\${newName}${extension}`), photo);
         fs.unlinkSync(path.join(__dirname, `..\\src\\uploads\\${request.file.originalname}`));
 
@@ -298,7 +297,6 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
             }else {
                 object[key] = request.body[key];
             }
-            console.log(`${key}: ${object[key]}, type=${typeof object[key]}`);
         }
 
         pool.query(`INSERT INTO used_car_sales.engines (volume, power, fuel_type) 
@@ -364,6 +362,43 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
             }else{
                 response.send({
                     message: 'Аккаунт успешно удалён',
+                });
+            }
+        });
+    });
+
+    app.delete('/deleteCar/:id', (request, response) => {
+        const id = request.params.id;
+
+        pool.query(`SELECT images.name, images.extension
+        FROM images
+        WHERE images.car_id = ${id}`, (error, result) => {
+            if (error) {
+                response.send({
+                    message: 'Ошибка удаления объявления, попробуйте позже',
+                    error: error.message
+                });
+            } else {
+                fs.unlinkSync(path.join(__dirname, `..\\src\\carPhotos\\${result[0].name}${result[0].extension}`));
+            }
+        })
+
+        pool.query( `DELETE FROM images, cars, engines USING images
+        INNER JOIN cars
+        ON images.car_id = cars.id
+        INNER JOIN engines
+        ON cars.engine_id = engines.id
+        WHERE cars.id = ${id};`, (error, result) => {
+            if (error) {
+                console.log(error);
+
+                response.send({
+                    message: 'Ошибка удаления объявления, попробуйте позже',
+                    error: error.message
+                });
+            } else {
+                response.send({
+                    message: 'Объявление успешно удалено',
                 });
             }
         });

@@ -1,10 +1,12 @@
 import renderCars from "./renderCars.js";
 
+import host from "../config/host.js";
+
 function getMyCars(id){
     const carChoices = document.querySelector('.car-choices');
 
     async function getCars(){
-        let response = await fetch(`http://localhost:3210/getMyCars/${id}`);
+        let response = await fetch(`${host}getMyCars/${id}`);
         let json = await response.json();
 
         return new Promise((resolve, reject) => {

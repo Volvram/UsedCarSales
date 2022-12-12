@@ -34,10 +34,6 @@ function renderCars(carsInfo, place){
                             </div>`;
 
         place.append(card);
-
-        // let carPhoto = document.querySelector(`.car-photo[id='${car.id}']`);
-        // carPhoto.style.backgroundImage = `url('${car.photo}')`;
-        // carPhoto.style.backdropFilter = `blur(20px)`;
     });
 
 }

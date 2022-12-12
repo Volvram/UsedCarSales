@@ -1,10 +1,12 @@
 import renderUserInfo from "./renderUserInfo.js";
 import getMyCars from './getMyCars.js';
 
+import host from "../config/host.js";
+
 function checkUser(){
     async function userRequest(){
         let token = localStorage.getItem('token');
-        let response = await fetch('http://localhost:3210/get-user', {
+        let response = await fetch(`${host}get-user`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json;charset=utf-8',
@@ -16,7 +18,7 @@ function checkUser(){
         let json = await response.json();
 
         if (json.error == true){
-            if (location.href == 'http://localhost:3210/myCars/myCars.html'){
+            if (location.href == `${host}myCars/myCars.html`){
                 alert('Войдите, чтобы видеть свои автомобили');
                 const panel = document.querySelector(".panel");
                 panel.style.display = "none";
@@ -26,7 +28,7 @@ function checkUser(){
             let user = json.user;
             renderUserInfo(user);
 
-            if (location.href == 'http://localhost:3210/myCars/myCars.html'){
+            if (location.href == `${host}myCars/myCars.html`){
                 const panel = document.querySelector(".panel");
                 panel.style.display = "flex";
                 getMyCars(user.id);

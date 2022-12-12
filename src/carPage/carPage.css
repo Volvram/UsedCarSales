@@ -63,6 +63,7 @@ body{
 }
 
 .content-image {
+    width: 100%;
     max-width: 1024px;
     object-fit: contain;
 }
@@ -117,4 +118,19 @@ body{
 
 .content-phone>a{
     color: #000000;
+}
+
+.delete-car-button {
+    cursor: pointer;
+
+    margin: 10px auto;
+
+    padding: 6px 12px;
+
+    background-color:#000000;
+    border:1px solid #c20606;
+
+    color: #c20606;
+
+    font-size: 20px;
 }
