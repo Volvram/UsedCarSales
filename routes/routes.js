@@ -156,7 +156,6 @@ WHERE cars.status = 1 AND cars.id = ${id}`, (error, result) => {
         }
         pool.query(`SELECT * FROM used_car_sales.users WHERE LOWER(email) = LOWER(${pool.escape(request.body.email)});`, (error, result) => {
             if (result.length) {
-                // response.status(409).send("Данный пользователь уже существует<br><button><a href='http://localhost:3210/'>Вернуться на главную страницу</a></button>");
                 return response.status(409).send({
                     message: 'Данный пользователь уже существует!'
                 });

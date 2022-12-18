@@ -60,7 +60,6 @@ function advertProcessForm() {
                 sendCarAddRequest(link, formdata)
                 .then((response) => {
                     alert(response.message);
-                    // closeModalWindow(addCar);
                     location.reload();
                 }, (response) => {
                     alert(response.message);
